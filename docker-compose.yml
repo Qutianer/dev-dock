@@ -1,0 +1,25 @@
+services:
+  web1:
+    image: localhost:5000/nginx-a
+    volumes:
+     - website:/usr/share/nginx/html
+    ports:
+     - "8081:80"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 200M
+  web2:
+    image: localhost:5000/httpd-a
+    volumes:
+     - website:/usr/local/apache2/htdocs
+    ports:
+     - "8082:80"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 200M
+volumes:
+  website:
