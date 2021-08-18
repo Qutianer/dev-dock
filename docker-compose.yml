@@ -1,10 +1,13 @@
+version: "3.8"
 services:
   web1:
     image: localhost:5000/nginx-a
     volumes:
-     - website:/usr/share/nginx/html
+      - website:/usr/share/nginx/html
+    networks:
+      - net1
     ports:
-     - "8081:80"
+      - "8081:80"
     deploy:
       resources:
         limits:
@@ -13,9 +16,11 @@ services:
   web2:
     image: localhost:5000/httpd-a
     volumes:
-     - website:/usr/local/apache2/htdocs
+      - website:/usr/local/apache2/htdocs
+    networks:
+      - net2
     ports:
-     - "8082:80"
+      - "8082:80"
     deploy:
       resources:
         limits:
@@ -23,3 +28,7 @@ services:
           memory: 200M
 volumes:
   website:
+    name: website
+networks:
+  net1:
+  net2:
